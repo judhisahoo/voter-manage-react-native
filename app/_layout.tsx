@@ -1,10 +1,10 @@
+// NO import '../global.css'; ← Remove this line
 import { useFonts } from 'expo-font';
 import { Slot } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import { AuthProvider } from '../context/AuthContext';
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
@@ -23,7 +23,6 @@ export default function RootLayout() {
   }
 
   return (
-    // Wrap the entire app in the Auth Provider
     <AuthProvider>
       <Slot /> 
     </AuthProvider>

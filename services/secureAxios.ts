@@ -116,6 +116,7 @@ class SecureApiClient {
   }
 
   async get<T>(endpoint: string, headers?: Record<string, string>): Promise<T> {
+    console.log('endpoint ::',endpoint);
     return this.request<T>(endpoint, { method: 'GET', headers });
   }
 

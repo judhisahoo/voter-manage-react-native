@@ -1,12 +1,26 @@
-import React from 'react';
-import { ScrollView, Text, View } from 'react-native';
-import { useAuth } from '../../context/AuthContext';
-// Import the components (Make sure these files exist in /components folder)
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, ScrollView, Text, View } from 'react-native';
 import AnalyticsChart from '../../components/AnalyticsChart';
 import RecentActivity from '../../components/RecentActivity';
+import { useAuth } from '../../context/AuthContext';
 
 export default function Dashboard() {
   const { user } = useAuth();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    // Small delay to ensure styles are loaded
+    const timer = setTimeout(() => setMounted(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#F8FAFC' }}>
+        <ActivityIndicator size="large" color="#007AFF" />
+      </View>
+    );
+  }
 
   return (
     <ScrollView 

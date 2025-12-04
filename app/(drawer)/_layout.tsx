@@ -2,13 +2,11 @@ import { Ionicons } from '@expo/vector-icons';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import { router } from 'expo-router';
 import { Drawer } from 'expo-router/drawer';
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useAuth } from '../../context/AuthContext';
 
-// ----------------------------------------------------------------------
-// 1. Custom Drawer Content Component (Tailwind Styled)
-// ----------------------------------------------------------------------
+// Custom Drawer Content Component
 function CustomDrawerContent(props: any) {
   const { user, logout } = useAuth();
   const isAdmin = user?.role === 'admin';
@@ -16,8 +14,7 @@ function CustomDrawerContent(props: any) {
   return (
     <DrawerContentScrollView {...props} contentContainerStyle={{ paddingTop: 0 }}>
       
-      {/* --- Header: User Profile --- */}
-      {/* bg-[#007AFF] matches the blue, pt-14 accounts for status bar */}
+      {/* Header: User Profile */}
       <View className="bg-[#007AFF] p-5 pt-14 mb-2">
         <View className="flex-row items-center">
           {/* Avatar Circle */}
@@ -39,7 +36,7 @@ function CustomDrawerContent(props: any) {
         </View>
       </View>
 
-      {/* --- Section: Main Menu --- */}
+      {/* Section: Main Menu */}
       <View className="mb-2">
         <DrawerItem 
           label="Dashboard"
@@ -54,7 +51,7 @@ function CustomDrawerContent(props: any) {
         />
       </View>
 
-      {/* --- Section: Admin Only --- */}
+      {/* Section: Admin Only */}
       {isAdmin && (
         <View className="mb-2">
           <Text className="text-xs text-gray-400 ml-5 mb-1 mt-2 font-semibold">
@@ -68,7 +65,7 @@ function CustomDrawerContent(props: any) {
         </View>
       )}
 
-      {/* --- Section: Footer / Account --- */}
+      {/* Section: Footer / Account */}
       <View className="mt-2 border-t border-gray-100 pt-2">
         <Text className="text-xs text-gray-400 ml-5 mb-1 mt-2 font-semibold">
           ACCOUNT
@@ -99,9 +96,7 @@ function CustomDrawerContent(props: any) {
   );
 }
 
-// ----------------------------------------------------------------------
-// 2. Main Layout Export
-// ----------------------------------------------------------------------
+// Main Layout Export
 export default function DrawerLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
@@ -110,8 +105,17 @@ export default function DrawerLayout() {
         screenOptions={{
             headerShown: true,
             drawerActiveTintColor: '#007AFF',
-            drawerStyle: { width: 300 }, // Slightly wider for better spacing
-            headerTintColor: '#007AFF', // Makes the hamburger icon blue
+            drawerStyle: { width: 300 },
+            headerTintColor: '#007AFF',
+            // --- ADDED SEARCH ICON TO HEADER ---
+            headerRight: () => (
+              <TouchableOpacity
+                onPress={() => router.push('/(drawer)/search')}
+                className="mr-4"
+              >
+                <Ionicons name="search-outline" size={24} color="#007AFF" />
+              </TouchableOpacity>
+            ),
         }}
       >
         {/* Visible Routes */}
@@ -121,7 +125,7 @@ export default function DrawerLayout() {
         />
         <Drawer.Screen 
           name="search" 
-          options={{ drawerLabel: 'Search', title: 'Search Database' }} 
+          options={{ drawerLabel: 'Search', title: 'Search Voter Data' }} 
         />
         <Drawer.Screen 
           name="user-manage" 
@@ -142,6 +146,22 @@ export default function DrawerLayout() {
           options={{ 
             drawerLabel: 'Change Password', 
             title: 'Change Password',
+            drawerItemStyle: { display: 'none' }
+          }} 
+        />
+        <Drawer.Screen 
+          name="user-add" 
+          options={{ 
+            drawerLabel: 'Add User', 
+            title: 'Add New User',
+            drawerItemStyle: { display: 'none' }
+          }} 
+        />
+        <Drawer.Screen 
+          name="user-edit" 
+          options={{ 
+            drawerLabel: 'Edit User', 
+            title: 'Edit User',
             drawerItemStyle: { display: 'none' }
           }} 
         />
