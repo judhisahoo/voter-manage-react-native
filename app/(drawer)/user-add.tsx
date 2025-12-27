@@ -2,13 +2,13 @@ import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
 import {
-  ActivityIndicator,
-  Alert,
-  ScrollView,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View
+    ActivityIndicator,
+    Alert,
+    ScrollView,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View
 } from 'react-native';
 import { useAuth } from '../../context/AuthContext';
 import { CreateUserDto, userService } from '../../services/userService';
@@ -59,7 +59,7 @@ export default function UserAddScreen() {
       Alert.alert('Success', 'User created successfully', [
         {
           text: 'OK',
-          onPress: () => router.replace('/(drawer)/user-manage'),
+          onPress: () => router.replace('/user-manage'),
         },
       ]);
     } catch (error: any) {

@@ -2,13 +2,13 @@ import { Ionicons } from '@expo/vector-icons';
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import {
-  ActivityIndicator,
-  Alert,
-  ScrollView,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View
+    ActivityIndicator,
+    Alert,
+    ScrollView,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View
 } from 'react-native';
 import { useAuth } from '../../context/AuthContext';
 import { UpdateUserDto, User, userService } from '../../services/userService';
@@ -45,7 +45,7 @@ export default function UserEditScreen() {
       });
     } catch (error: any) {
       Alert.alert('Error', error.message || 'Failed to load user', [
-        { text: 'OK', onPress: () => router.replace('/(drawer)/user-manage') },
+        { text: 'OK', onPress: () => router.replace('/user-manage') },
       ]);
     } finally {
       setLoading(false);
@@ -77,7 +77,7 @@ export default function UserEditScreen() {
       Alert.alert('Success', 'User updated successfully', [
         {
           text: 'OK',
-          onPress: () => router.replace('/(drawer)/user-manage'),
+          onPress: () => router.replace('/user-manage'),
         },
       ]);
     } catch (error: any) {
@@ -120,7 +120,7 @@ export default function UserEditScreen() {
           User Not Found
         </Text>
         <TouchableOpacity
-          onPress={() => router.replace('/(drawer)/user-manage')}
+          onPress={() => router.replace('/user-manage')}
           className="mt-4 bg-[#007AFF] px-6 py-3 rounded-lg"
         >
           <Text className="text-white font-semibold">Go Back</Text>

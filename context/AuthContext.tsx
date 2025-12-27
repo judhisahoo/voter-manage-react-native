@@ -68,10 +68,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     
     if (!user && !inAuthGroup) {
       // If not logged in and not in login screen, go to login
-      router.replace('/(auth)/login');
+      router.replace('/login');
     } else if (user && inAuthGroup) {
       // If logged in but in login screen, go to dashboard
-      router.replace('/(drawer)/dashboard');
+      router.replace('/dashboard');
     }
   }, [user, loading, segments]);
 

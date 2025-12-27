@@ -91,7 +91,7 @@ class SecureApiClient {
       // Handle 401 - Unauthorized
       if (response.status === 401) {
         await clearAuth();
-        router.replace('/(auth)/login'); 
+        router.replace('/login'); 
         throw new Error('Unauthorized');
       }
 

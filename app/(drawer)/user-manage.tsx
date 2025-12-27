@@ -179,7 +179,7 @@ export default function UserManageScreen() {
         <View className="flex-row items-center justify-between">
           <Text className="text-xl font-bold text-gray-800">Manage Users</Text>
           <TouchableOpacity
-            onPress={() => router.push('/(drawer)/user-add')}
+            onPress={() => router.push('/user-add')}
             className="bg-[#007AFF] px-4 py-2 rounded-lg flex-row items-center"
           >
             <Ionicons name="add" size={20} color="white" />
@@ -260,7 +260,7 @@ export default function UserManageScreen() {
               {/* Action Buttons */}
               <View className="flex-row gap-2 mt-2">
                 <TouchableOpacity
-                  onPress={() => router.push(`/(drawer)/user-edit?id=${user._id || user.id}`)}
+                  onPress={() => router.push(`/user-edit?id=${user._id || user.id}`)}
                   className="flex-1 bg-blue-50 py-2 rounded-lg flex-row items-center justify-center"
                 >
                   <Ionicons name="pencil-outline" size={18} color="#007AFF" />

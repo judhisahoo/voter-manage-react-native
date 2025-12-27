@@ -2,13 +2,13 @@ import { FontAwesome } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import {
-  ActivityIndicator,
-  Alert,
-  ScrollView,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View
+    ActivityIndicator,
+    Alert,
+    ScrollView,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View
 } from 'react-native';
 import { useAuth } from '../../context/AuthContext';
 import { apiClient } from '../../services/secureAxios';
@@ -77,9 +77,9 @@ export default function ProfileScreen() {
         { 
           text: "Logout", 
           style: "destructive", 
-          onPress: () => {
+            onPress: () => {
             logout();
-            router.replace('/(auth)/login');
+            router.replace('/login');
           }
         }
       ]

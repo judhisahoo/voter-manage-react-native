@@ -11,6 +11,12 @@ function CustomDrawerContent(props: any) {
   const { user, logout } = useAuth();
   const isAdmin = user?.role === 'admin';
 
+  const showOnlyFirstNameAsTitleCase = (name: string) => {
+    return name.split(' ')[0].charAt(0).toUpperCase() + name.split(' ')[0].slice(1);
+  }
+
+  let firstName = user?.name ? showOnlyFirstNameAsTitleCase(user.name) : 'User';
+
   return (
     <DrawerContentScrollView {...props} contentContainerStyle={{ paddingTop: 0 }}>
       
@@ -27,7 +33,7 @@ function CustomDrawerContent(props: any) {
           {/* User Info */}
           <View>
             <Text className="text-white text-lg font-bold">
-              {user?.name || 'User'}
+              {firstName || 'User'}
             </Text>
             <Text className="text-white/80 text-xs mt-0.5">
               {user?.role?.toUpperCase() || 'GUEST'}
@@ -40,14 +46,19 @@ function CustomDrawerContent(props: any) {
       <View className="mb-2">
         <DrawerItem 
           label="Dashboard"
-          onPress={() => router.push('/(drawer)/dashboard')}
+          onPress={() => router.push('/dashboard')}
           icon={({color, size}) => <Ionicons name="home-outline" size={size} color={color} />}
         />
         
         <DrawerItem 
           label="Search Data"
-          onPress={() => router.push('/(drawer)/search')}
+          onPress={() => router.push('/search')}
           icon={({color, size}) => <Ionicons name="search-outline" size={size} color={color} />}
+        />
+        <DrawerItem 
+          label="Voter Data"
+          onPress={() => router.push('/voter-list')}
+          icon={({color, size}) => <Ionicons name="list-outline" size={size} color={color} />}
         />
       </View>
 
@@ -59,7 +70,7 @@ function CustomDrawerContent(props: any) {
           </Text>
           <DrawerItem 
             label="User Management"
-            onPress={() => router.push('/(drawer)/user-manage')}
+            onPress={() => router.push('/user-manage')}
             icon={({color, size}) => <Ionicons name="people-outline" size={size} color={color} />}
           />
         </View>
@@ -72,13 +83,13 @@ function CustomDrawerContent(props: any) {
         </Text>
         
         <DrawerItem 
-            label="Edit Profile"
-            onPress={() => router.push('/(drawer)/profile')}
-            icon={({color, size}) => <Ionicons name="person-circle-outline" size={size} color={color} />}
+          label="Edit Profile"
+          onPress={() => router.push('/profile')}
+          icon={({color, size}) => <Ionicons name="person-circle-outline" size={size} color={color} />}
         />
         <DrawerItem 
           label="Change Password"
-          onPress={() => router.push('/(drawer)/change-password')}
+          onPress={() => router.push('/change-password')}
           icon={({color, size}) => <Ionicons name="key-outline" size={size} color={color} />}
         />
         
@@ -110,7 +121,7 @@ export default function DrawerLayout() {
             // --- ADDED SEARCH ICON TO HEADER ---
             headerRight: () => (
               <TouchableOpacity
-                onPress={() => router.push('/(drawer)/search')}
+                onPress={() => router.push('/search')}
                 className="mr-4"
               >
                 <Ionicons name="search-outline" size={24} color="#007AFF" />
@@ -126,6 +137,10 @@ export default function DrawerLayout() {
         <Drawer.Screen 
           name="search" 
           options={{ drawerLabel: 'Search', title: 'Search Voter Data' }} 
+        />
+        <Drawer.Screen 
+          name="voter-list"
+          options={{ drawerLabel: 'Voter Data', title: 'Voter Data List' }}
         />
         <Drawer.Screen 
           name="user-manage" 
